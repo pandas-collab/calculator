@@ -1,0 +1,321 @@
+/**
+ * Responsive Design for Calculator
+ * Mobile-first approach with breakpoints for different screen sizes
+ */
+
+/* Base styles (mobile-first) */
+.calculator {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.display-container {
+    margin-bottom: 20px;
+}
+
+.display {
+    height: 80px;
+    padding: 15px;
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    height: 60px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.history-panel {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100vh;
+    background: #f8f9fa;
+    border-left: 1px solid #dee2e6;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.history-panel.visible {
+    right: 0;
+}
+
+.history-header {
+    padding: 20px;
+    border-bottom: 1px solid #dee2e6;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
+    .calculator {
+        max-width: 450px;
+        padding: 30px;
+    }
+
+    .display {
+        height: 90px;
+        padding: 20px;
+        font-size: 2.5rem;
+    }
+
+    .btn {
+        height: 70px;
+        font-size: 1.4rem;
+        border-radius: 10px;
+    }
+
+    .keypad {
+        gap: 15px;
+    }
+
+    .history-panel {
+        width: 400px;
+        right: -400px;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+    .calculator {
+        max-width: 500px;
+        padding: 40px;
+        margin: 50px auto;
+    }
+
+    .display {
+        height: 100px;
+        padding: 25px;
+        font-size: 3rem;
+    }
+
+    .btn {
+        height: 80px;
+        font-size: 1.6rem;
+        border-radius: 12px;
+    }
+
+    .keypad {
+        gap: 20px;
+    }
+
+    .history-panel {
+        width: 450px;
+        right: -450px;
+    }
+
+    /* Hover effects for desktop */
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+}
+
+/* Large desktop styles */
+@media (min-width: 1200px) {
+    .calculator {
+        max-width: 550px;
+    }
+
+    .display {
+        height: 110px;
+        font-size: 3.2rem;
+    }
+
+    .btn {
+        height: 85px;
+        font-size: 1.8rem;
+    }
+}
+
+/* Mobile landscape orientation */
+@media (max-width: 767px) and (orientation: landscape) {
+    .calculator {
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    .display {
+        height: 60px;
+        padding: 10px;
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .keypad {
+        gap: 8px;
+    }
+
+    .history-panel {
+        width: 300px;
+        right: -300px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 375px) {
+    .calculator {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .display {
+        height: 70px;
+        padding: 12px;
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        height: 55px;
+        font-size: 1.1rem;
+    }
+
+    .keypad {
+        gap: 8px;
+    }
+
+    .history-panel {
+        width: 280px;
+        right: -280px;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .btn {
+        border: 0.5px solid rgba(0,0,0,0.1);
+    }
+}
+
+/* Accessibility - Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .history-panel,
+    .display-content {
+        transition: none;
+    }
+
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .calculator {
+        box-shadow: none;
+        border: 2px solid #000;
+    }
+
+    .btn {
+        border: 1px solid #000;
+        color: #000 !important;
+        background: #fff !important;
+    }
+
+    .history-panel {
+        display: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .history-panel {
+        background: #2c2c2c;
+        border-left-color: #444;
+    }
+
+    .history-header {
+        background: #333;
+        border-bottom-color: #444;
+        color: #fff;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.btn:focus {
+    outline: 3px solid #4285f4;
+    outline-offset: 2px;
+}
+
+/* Active states for touch devices */
+.btn:active,
+.btn.pressed {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+/* History panel responsiveness */
+.history-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.history-actions {
+    display: flex;
+    gap: 10px;
+    align-self: flex-end;
+}
+
+.history-reuse-btn,
+.history-delete-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.history-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Responsive history button */
+.history-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color
+echo 'Fix completed successfully'
+
+}
